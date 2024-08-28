@@ -7,7 +7,7 @@ class Database {
     public static function setUpConnection() {
         if (!isset(Database::$connection)) {
             // Define the SSL CA parameter
-            $ssl_ca = '/home/site/wwwroot/ca-cert.pem';
+            $ssl_ca = 'ca-cert.pem';
 
             // Initialize the connection
             Database::$connection = new mysqli(
