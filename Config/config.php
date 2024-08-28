@@ -1,8 +1,8 @@
 <?php
-    $servername = "byteforce.postgres.database.azure.com:3306";
-    $username = "ademzryqwx";
-    $password = "$3mKiQHq6N2tO6Ij";
-    $dbname = "inventoryMgt";
+    $servername = "byteforceinventory.mysql.database.azure.com:3306";
+    $username = "teki";
+    $password = "Hacker@119";
+    $dbname = "inventorymgt";
 
     //Create Connection
     $conn = new mysqli($servername, $username, $password, $dbname);
