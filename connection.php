@@ -6,7 +6,7 @@ class Database{
 
     public static function setUpConnection(){
         if(!isset(Database::$connection)){
-            Database::$connection = new mysqli("byteforce.postgres.database.azure.com","ojtpbsqpkk","$3mKiQHq6N2tO6Ij","inventorymgt","3306");
+            Database::$connection = new mysqli("byteforce.postgres.database.azure.com","ademzryqwx","$3mKiQHq6N2tO6Ij","inventorymgt","3306");
         }
     }
 
