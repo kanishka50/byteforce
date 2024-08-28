@@ -1,6 +1,6 @@
 <?php
     $servername = "byteforce.postgres.database.azure.com:3306";
-    $username = "ojtpbsqpkk";
+    $username = "ademzryqwx";
     $password = "$3mKiQHq6N2tO6Ij";
     $dbname = "inventoryMgt";
 
