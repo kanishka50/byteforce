@@ -1,7 +1,7 @@
-<?php
-require "sessionCheck.php";
+// <?php
+// require "sessionCheck.php";
 
-?>
+// ?>
 
 
 
