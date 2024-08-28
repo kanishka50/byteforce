@@ -1,3 +1,4 @@
+<?php
 class Database {
     public static $connection;
 
