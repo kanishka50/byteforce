@@ -221,12 +221,11 @@ require "sessionCheck.php";
                         </div>
                         <div class="card-body" style="color:black;">
                             <?php
-                            echo "Feature Not Available yet";
-                            // Query to get the total sales amount
-                            // $sql = "SELECT SUM(SaleAmount) as total_sales FROM Sales";
-                            // $result = $conn->query($sql);
-                            // $total_sales = $result->fetch_assoc()['total_sales'];
-                            // echo '<h3>$' . number_format($total_sales, 2) . '</h3>';
+                            Query to get the total sales amount
+                            $sql = "SELECT SUM(Amount) as total_sales FROM orders";
+                            $result = $conn->query($sql);
+                            $total_sales = $result->fetch_assoc()['total_sales'];
+                            echo '<h3>$' . number_format($total_sales, 2) . '</h3>';
                             ?>
                         </div>
                     </div>
