@@ -1,64 +1,43 @@
 <?php
 
 class Database {
+    
+    private static $connection;
 
-    public static $connection;
+    // Database configuration
+    private static $host = 'byteforceinventory.mysql.database.azure.com';
+    private static $port = 3306;
+    private static $username = 'teki';
+    private static $password = 'Hacker@119';
+    private static $dbname = 'inventorymgt';
+    private static $ssl_ca = 'ca-cert.pem'; // Path to SSL certificate
 
     public static function setUpConnection() {
         if (!isset(Database::$connection)) {
-            // Define the SSL CA parameter
-            $ssl_ca = 'ca-cert.pem';
-
-            // Initialize the connection
-            Database::$connection = new mysqli(
-                "byteforceinventory.mysql.database.azure.com", 
-                "teki", 
-                "Hacker@119", 
-                "inventorymgt", 
-                3306 // Port should be an integer
-            );
-
-            // Check for connection errors
-            if (Database::$connection->connect_error) {
-                die("Connection failed: " . Database::$connection->connect_error);
+            Database::$connection = new mysqli();
+            
+            // Set up SSL
+            if (!Database::$connection->ssl_set(null, null, self::$ssl_ca, null, null)) {
+                echo json_encode(['status' => 'error', 'message' => 'SSL setup failed']);
+                exit();
             }
 
-            // Set the SSL CA option
-            Database::$connection->ssl_set(NULL, NULL, $ssl_ca, NULL, NULL);
-
-            // Enable SSL verification of the server certificate
-            if (!Database::$connection->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true)) {
-                die("Failed to set SSL verification mode");
-            }
-
-            // Reconnect with SSL enforced
-            if (!Database::$connection->real_connect(
-                "byteforceinventory.mysql.database.azure.com", 
-                "teki", 
-                "Hacker@119", 
-                "inventorymgt", 
-                3306, // Port should be an integer
-                NULL, 
-                MYSQLI_CLIENT_SSL
-            )) {
-                die("SSL connection failed: " . mysqli_connect_error());
+            // Establish connection with SSL
+            if (!Database::$connection->real_connect(self::$host, self::$username, self::$password, self::$dbname, self::$port, null, MYSQLI_CLIENT_SSL)) {
+                echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
+                exit();
             }
         }
     }
 
     public static function iud($q) {
         Database::setUpConnection();
-        if (!Database::$connection->query($q)) {
-            die("Query failed: " . Database::$connection->error);
-        }
+        Database::$connection->query($q);
     }
 
     public static function search($q) {
         Database::setUpConnection();
         $resultset = Database::$connection->query($q);
-        if (!$resultset) {
-            die("Query failed: " . Database::$connection->error);
-        }
         return $resultset;
     }
 
@@ -67,6 +46,20 @@ class Database {
         return Database::$connection;
     }
 
+    public static function closeConnection() {
+        if (isset(Database::$connection)) {
+            Database::$connection->close();
+            Database::$connection = null;
+        }
+    }
 }
+
+// Example usage:
+// Database::iud("INSERT INTO table_name (column1, column2) VALUES ('value1', 'value2')");
+// $result = Database::search("SELECT * FROM table_name");
+// while ($row = $result->fetch_assoc()) {
+//     echo $row['column_name'];
+// }
+// Database::closeConnection();
 
 ?>
