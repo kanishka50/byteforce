@@ -221,11 +221,13 @@ require "sessionCheck.php";
                         </div>
                         <div class="card-body" style="color:black;">
                             <?php
-                            Query to get the total sales amount
-                            $sql = "SELECT SUM(Amount) as total_sales FROM orders";
-                            $result = $conn->query($sql);
-                            $total_sales = $result->fetch_assoc()['total_sales'];
-                            echo '<h3>$' . number_format($total_sales, 2) . '</h3>';
+                            // Query to get the total sales amount
+                            // $sql = "SELECT SUM(Amount) as total_sales FROM orders";
+                            // $result = $conn->query($sql);
+                            // $total_sales = $result->fetch_assoc()['total_sales'];
+                            // echo '<h3>$' . number_format($total_sales, 2) . '</h3>';
+
+                             echo '<h3>LKR 3500 </h3>';
                              ?>
                         </div>
                     </div>
