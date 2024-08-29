@@ -1,4 +1,7 @@
+<?php
+require "sessionCheck.php";
 
+?>
 
 
 
